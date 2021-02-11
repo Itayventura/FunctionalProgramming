@@ -13,6 +13,10 @@ public class FunctionObject {
             return function.apply(2,3);
         }
 
+        public static Function<Integer, Integer> createMultiplier(Integer x){
+            return (Integer y) -> x*y;
+        }
+
     }
 
     public static void main(String[] args){
@@ -22,5 +26,8 @@ public class FunctionObject {
         System.out.println(MyMath.combineTwoAndThree(MyMath::add));
         System.out.println(MyMath.combineTwoAndThree(MyMath::subtract));
         System.out.println(MyMath.combineTwoAndThree((x,y) -> x+x-y-y));
+
+        System.out.println(MyMath.createMultiplier(2).apply(3));
+        System.out.println(MyMath.createMultiplier(10).apply(6));
     }
 }

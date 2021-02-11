@@ -47,6 +47,16 @@ public class Stream {
         return words.stream().collect(Collectors.partitioningBy(word -> word.length() > 5));
     }
 
+    public static List<String> parallelProcessing(List<String> words){
+        return words.stream().map(word -> {
+            System.out.println("first process of " + word);
+            return word.toUpperCase(Locale.ROOT);
+        }).map(word -> {
+            System.out.println("second process of" + word);
+            return word + "!";
+        }).collect(Collectors.toList());
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4));
         System.out.println("before doubling " + (list));
@@ -71,6 +81,9 @@ public class Stream {
         System.out.println(groupBy(words));
 
         System.out.println(partitionBy(words));
+
+        System.out.println("parallel processing");
+        System.out.println(parallelProcessing(words));
 
     }
 }

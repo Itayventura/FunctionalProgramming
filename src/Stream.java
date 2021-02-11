@@ -57,5 +57,7 @@ public class Stream {
 
         System.out.println(join(longerThan(5, words)));
 
+        System.out.println("how many words equals to a? " + words.stream().filter(s -> s.equals("a")).collect(Collectors.counting()));
+
     }
 }

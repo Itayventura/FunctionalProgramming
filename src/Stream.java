@@ -38,6 +38,11 @@ public class Stream {
         return list.stream().collect(Collectors.toSet());
     }
 
+    public static Map<Integer, List<String>> groupBy(List<String> words){
+        //return words.stream().collect(Collectors.groupingBy(String::length));
+        return words.stream().collect(Collectors.groupingBy(word -> word.length()));
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4));
         System.out.println("before doubling " + (list));
@@ -58,6 +63,8 @@ public class Stream {
         System.out.println(join(longerThan(5, words)));
 
         System.out.println("how many words equals to a? " + words.stream().filter(s -> s.equals("a")).collect(Collectors.counting()));
+
+        System.out.println(groupBy(words));
 
     }
 }

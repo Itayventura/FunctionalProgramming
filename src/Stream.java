@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -15,9 +16,10 @@ public class Stream {
         return list.stream().filter(isEven).collect(Collectors.toList());
     }
 
-    public static List<String> longerThanFiveChars(List<String> list){
-        Predicate<String> isLongerThanFiveChar = s -> s.length() > 5;
-        return list.stream().filter(isLongerThanFiveChar).collect(Collectors.toList());
+    public static List<String> longerThan(int numOfChars, List<String> list){
+        Function<Integer, Predicate<String>> predicateGenerator = x -> str -> str.length() > x;
+        Predicate<String> isLongerThan = predicateGenerator.apply(numOfChars);
+        return list.stream().filter(isLongerThan).collect(Collectors.toList());
     }
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4));
@@ -26,8 +28,8 @@ public class Stream {
         System.out.println("after isEven" + evens(list));
 
         List<String> words = new ArrayList<>(Arrays.asList("a", "ab", "abc", "abcd", "abcde", "abcdef"," abcdefg"));
-        System.out.println("before filter " + words);
-        System.out.println("after filter " + longerThanFiveChars(words));
+        System.out.println("before filter with 5 " + words);
+        System.out.println("after filter with 5 " + longerThan(5, words));
 
     }
 }

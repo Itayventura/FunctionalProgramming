@@ -21,5 +21,6 @@ public class FunctionObject {
 
         System.out.println(MyMath.combineTwoAndThree(MyMath::add));
         System.out.println(MyMath.combineTwoAndThree(MyMath::subtract));
+        System.out.println(MyMath.combineTwoAndThree((x,y) -> x+x-y-y));
     }
 }

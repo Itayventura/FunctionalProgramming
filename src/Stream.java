@@ -28,6 +28,11 @@ public class Stream {
         return list.stream().reduce(0, calcSum);
     }
 
+    public static String join(List<String> words){
+        //return String.join(",", words);
+        return words.stream().collect(Collectors.joining(","));
+    }
+
     public static Set<Integer> set(List<Integer> list){
         //return new HashSet<>(list);
         return list.stream().collect(Collectors.toSet());
@@ -49,6 +54,8 @@ public class Stream {
 
         System.out.println("before set " + (anotherList));
         System.out.println("after set " + set(anotherList));
+
+        System.out.println(join(longerThan(5, words)));
 
     }
 }

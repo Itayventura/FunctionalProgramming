@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -28,10 +26,13 @@ public class Stream {
         BinaryOperator<Integer> calcSum = (acc, x) -> acc + x;
         BinaryOperator<Integer> calcSumSimplified = Integer::sum;
         return list.stream().reduce(0, calcSum);
-
-
-
     }
+
+    public static Set<Integer> set(List<Integer> list){
+        //return new HashSet<>(list);
+        return list.stream().collect(Collectors.toSet());
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4));
         System.out.println("before doubling " + (list));
@@ -43,6 +44,11 @@ public class Stream {
         System.out.println("after filter with 5 " + longerThan(5, words));
 
         System.out.println("sum: " + sum(list));
+
+        List<Integer> anotherList = new ArrayList<>(Arrays.asList(1,2,3,4,1,2,3,2,2,3));
+
+        System.out.println("before set " + (anotherList));
+        System.out.println("after set " + set(anotherList));
 
     }
 }

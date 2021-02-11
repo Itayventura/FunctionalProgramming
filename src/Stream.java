@@ -43,6 +43,10 @@ public class Stream {
         return words.stream().collect(Collectors.groupingBy(word -> word.length()));
     }
 
+    public static Map<Boolean, List<String>> partitionBy(List<String> words){
+        return words.stream().collect(Collectors.partitioningBy(word -> word.length() > 5));
+    }
+
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4));
         System.out.println("before doubling " + (list));
@@ -65,6 +69,8 @@ public class Stream {
         System.out.println("how many words equals to a? " + words.stream().filter(s -> s.equals("a")).collect(Collectors.counting()));
 
         System.out.println(groupBy(words));
+
+        System.out.println(partitionBy(words));
 
     }
 }

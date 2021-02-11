@@ -82,6 +82,17 @@ public class StreamWithObjects {
 
         Float s = employees.stream().map(employee -> employee.salary).collect(Collectors.toList()).stream().reduce(0f, Float::sum);
         System.out.println("sum: " + s);
+
+        Float SumOfSalariesOfDevelopers = employees
+                .stream()
+                .filter(employee -> employee.jobTitle.equals("developer"))
+                .map(developer -> developer.salary)
+                .reduce(0f, Float::sum);
+        Long cntDevelopers = employees
+                .stream()
+                .filter(employee -> employee.jobTitle.equals("developer"))
+                .collect(Collectors.counting());
+        System.out.println("developers average salary is: " + SumOfSalariesOfDevelopers/cntDevelopers);
     }
 }
 

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StreamWithObjects {
@@ -38,6 +39,21 @@ public class StreamWithObjects {
             this.jobTitle = jobTitle;
             this.salary = salary;
         }
+    }
+
+    public static Map<String, Float> mapAvgSalaryByJobTitle(List<Employee> employees){
+        return  employees
+                .stream()
+                .collect(Collectors.groupingBy(employee -> employee.jobTitle))
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey(),
+                        entry -> entry.getValue()
+                                .stream()
+                                .map(employee -> employee.salary)
+                                .reduce(0f, Float::sum)/entry.getValue().size()));
+
     }
 
     public static void main(String[] args) {
@@ -93,6 +109,9 @@ public class StreamWithObjects {
                 .filter(employee -> employee.jobTitle.equals("developer"))
                 .collect(Collectors.counting());
         System.out.println("developers average salary is: " + SumOfSalariesOfDevelopers/cntDevelopers);
+
+        System.out.println("avg salaries by job title");
+        System.out.println(mapAvgSalaryByJobTitle(employees));
     }
 }
 
